@@ -1,0 +1,241 @@
+<mvc:View controllerName="com.pgr.suspence.project1pgr.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.f"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:vm="sap.ui.comp.variants"
+    xmlns:ui="sap.ui.table"
+    xmlns:smarttable="sap.ui.comp.smarttable"
+    xmlns:navpopover="sap.ui.comp.navpopover"
+    xmlns:currency="sap.ui.unified"
+    xmlns:l="sap.ui.layout"
+    xmlns:variants="sap.ui.comp.smartvariants"
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    height="100%">
+    <!-- <Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content />
+				</Page>
+			</pages>
+		</App>
+	</Shell> -->
+    <f:DynamicPage id="dynamicPageId" headerExpanded="true" showFooter="false">
+        <f:title>
+            <f:DynamicPageTitle id="id_dynpgt">
+                <f:heading>
+                    <vm:VariantManagement id="id_varym" standardItemText="PGR Items">
+                    </vm:VariantManagement>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader id="id_dynpg" pinnable="false">
+                <f:content>
+                    <fb:FilterBar id="filterbar" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="true">
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem id="id_g1" visibleInFilterBar="true" groupName="G1" groupTitle="Group1" name="A" label="Plant">
+                                <fb:control>
+                                    <!-- <Input id="input_id"/> -->
+                                    <Input id="client_id" value="" width="5rem" change="handleChange_PC" showValueHelp="true" valueHelpOnly="false" valueHelpRequest=".handleClientCenterValueHelp" showSuggestion="true" maxSuggestionWidth="400px" showTableSuggestionValueHelp="false" suggestionRows="{ path: 'FiggdashModel_vh>/Plants'}" suggestionItemSelected="handleCosCen_Suggest">
+                                        <suggestionColumns>
+                                            <Column id="col_id">
+                                                <Label id="id_plant" text="Plant"/>
+                                            </Column>
+                                            <Column id="col2_id">
+                                                <Label id="id_plantDesc" text="Plant Description"/>
+                                            </Column>
+                                        </suggestionColumns>
+                                        <suggestionRows>
+                                            <ColumnListItem id="collist_id">
+                                                <cells>
+                                                    <Label id="plant_id" text="{FiggdashModel_vh>Plant}"/>
+                                                    <Label id="plantdesc_id" text="{FiggdashModel_vh>Description}"/>
+                                                </cells>
+                                            </ColumnListItem>
+                                        </suggestionRows>
+                                    </Input>
+                                    <!-- <MultiInput id="multiInput" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequested">
+                                    </MultiInput> -->
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem id="id_g2" visibleInFilterBar="true" groupName="G2" groupTitle="Group2" name="B" label="Date">
+                                <fb:control>
+                                    <!-- <DatePicker id="DP1" placeholder="Enter Date" change="handleChange" class="sapUiSmallMarginBottom"/> -->
+                                    <DateRangeSelection id="date_id" change="handleChange"/>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        
+        <f:content >
+        <ui:Table id="table1" visible="false" rows="{TableData>/tabledata_res}" rowSelectionChange="handleRowSelected" selectionMode="MultiToggle" visibleRowCount="10" ariaLabelledBy="title" class="sapFDynamicPageAlignContent"
+					   width="100%">
+                    <ui:extension>
+                    <OverflowToolbar id="_IDGenOverflowToolbar1" style="Clear">
+                        <Title id="title" text=""/>
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                        <Button id="reprocess_id" text="Re-Process" press="handleReProcess"/>
+                        <Button id="markas_id" text="Mark as Processed" press="onSubmitDialogPress"/>
+                        <Button id="settings_id" icon="sap-icon://action-settings"  tooltip="Column Selection" press="onColumnVisibility"/>
+                    </OverflowToolbar>
+                </ui:extension>
+                    <ui:columns>
+                        <ui:Column id="_IDGenColumn1" width="6rem">
+                            <Label id="_IDGenLabel1" text="Delivery" />
+                            <ui:template>
+                                <!-- text="{path: 'TableData>DeliveryNumber',type : 'sap.ui.model.odata.type.String', constraints : {isDigitSequence : true, maxLength : 10 }}" -->
+                                <Text id="_IDGenText1" text="{path: 'TableData>DeliveryNumber',type : 'sap.ui.model.odata.type.String', constraints : {isDigitSequence : true, maxLength : 10 }}" wrapping="false" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="_IDGenColumn2" width="8rem">
+                            <Label id="_IDGenLabel2" text="Vehicle Number" />
+                            <ui:template>
+                                <Text id="_IDGenInput1" text="{TableData>VehicleNumber}"/>
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="_IDGenColumn3" width="5rem" >
+                            <Label id="_IDGenLabel3" text="Trailer Id" />
+                            <ui:template>
+                                <Label id="_IDGenLabel4" text="{TableData>TrailerID}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="_IDGenColumn4" width="8rem">
+                            <Label id="_IDGenLabel5" text="Movement Type" />
+                            <ui:template>
+                                <Label id="_IDGenLabel6" text="{TableData>GoodsMovementType}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="_IDGenColumn5" width="8rem">
+                            <Label id="_IDGenLabel7" text="Posting Date" />
+                            <ui:template>
+
+                                <Text id="new_id" text="{path:'TableData>PostingDate',type: 'sap.ui.model.type.Date',
+				        formatOptions: {
+				          pattern: 'MM/dd/yyyy',
+                          UTC:'true'
+				        }}" />
+                            </ui:template>
+                        </ui:Column>
+                         <ui:Column id="docd_id" width="8rem">
+                            <Label id="doc_id" text="Document Date" />
+                            <ui:template>
+                                <Text id="new17_id" text="{path:'TableData>DocumentDate',type: 'sap.ui.model.type.Date',
+				        formatOptions: {
+				          pattern: 'MM/dd/yyyy',
+                          UTC:'true'
+				        }}" />
+                        
+                        
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="pgr_id" width="7rem">
+                            <Label id="pgrlabel_id" text="PGR Status" />
+                            <ui:template>
+                                <Text id="new3_id" text="" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="mdcol_id" width="9rem">
+                            <Label id="mdcol" text="Material Document" />
+                            <ui:template>
+                                <Text id="new4_id" text="{TableData>MaterialDocument}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="mdy_id" width="9rem">
+                            <Label id="mdyl_id" text="Material Doc. Year" />
+                            <ui:template>
+                                <Text id="new5_id" text="{TableData>MatDocYear}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="plantcol_id" width="4rem">
+                            <Label id="plantl_id" text="Plant" />
+                            <ui:template>
+                                <Text id="new6_id" text="{TableData>Plant}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="batchcol_id" width="4rem" visible="false">
+                            <Label id="batchl_id" text="Batch" />
+                            <ui:template>
+                                <Text id="new7_id" text="{TableData>BatchNumber}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="quancol_id" width="6rem">
+                            <Label id="quanl_id" text="Quantity" />
+                            <ui:template>
+                                <Text id="new8_id" text="{TableData>QuantityInBaseUnit}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="uomcol_id" width="4rem" visible="false">
+                            <Label id="uoml_id" text="Base Unit of Measure" />
+                            <ui:template>
+                                <Text id="new9_id" text="{TableData>MaterialBaseUnit}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="coccol_id" width="8rem">
+                            <Label id="cocl_id" text="Cost Center" />
+                            <ui:template>
+                                <Text id="new10_id" text="{TableData>CostCenter}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="glcol_id" width="7rem">
+                            <Label id="gll_id" text="G/L Account" />
+                            <ui:template>
+                                <Text id="new11_id" text="{TableData>GLAccount}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="podcol_id" width="5rem" visible="false">
+                            <Label id="podl_id" text="Purchasing Document" />
+                            <ui:template>
+                                <Text id="new12_id" text="{TableData>PurchDocu}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="errcol_id" width="12rem">
+                            <Label id="errl_id" text="Error Description" />
+                            <ui:template>
+                                <Text id="new13_id" text="{TableData>ErrorMessage1}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="addcol_id" width="12rem" visible="false">
+                            <Label id="addl_id" text="Additional Error Description" />
+                            <ui:template>
+                                <Text id="new14_id" text="{TableData>ErrorMessage2}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="commcol_id" width="12rem">
+                            <Label id="comml_id" text="Processing Comments" />
+                            <ui:template>
+                                <Text id="new15_id" text="{TableData>ProcessComment}" />
+                            </ui:template>
+                        </ui:Column>
+                        <ui:Column id="creon_id" width="6rem">
+                            <Label id="crel_id" text="Created On" />
+                            <ui:template>
+                                <Text id="new16_id" text="{path:'TableData>CreatedOn',type: 'sap.ui.model.type.Date',
+				        formatOptions: {
+				          pattern: 'MM/dd/yyyy',
+                          UTC:'true'
+				        }}" />
+                        
+                        <!-- DocumentDate -->
+                                <!-- <Text id="new16_id" text="{TableData>CreatedOn}" /> -->
+                            </ui:template>
+                        </ui:Column>
+                       
+
+                    </ui:columns>
+                </ui:Table>
+           
+        </f:content>
+        
+
+    </f:DynamicPage>
+   
+
+</mvc:View>
