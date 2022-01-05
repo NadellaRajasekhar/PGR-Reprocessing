@@ -482,6 +482,7 @@ sap.ui.define([
                                 id:"questionTextArea",
                                 width: "100%",
                                 value:"",
+                                width: "100%",
                                 placeholder: "Add note (required)",
                                 maxLength:100,
                                 liveChange: function (oEvent) {
@@ -579,6 +580,7 @@ sap.ui.define([
 				});
                 that.getOwnerComponent().getModel().submitChanges();
                 // that.getOwnerComponent().getModel().submitChanges(mParameters);
+
                 // ___________
                
                 // this.getOwnerComponent().getModel().create("/ETS_MATERIAL_DOCUMENT_HEADER", this.arr_rowSel[0], {
