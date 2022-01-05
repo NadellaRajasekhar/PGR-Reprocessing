@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog id="oList1" draggable="true" contentHeight="420px" contentWidth="600px" afterClose="cancelAddLocation" title="Assign Collaboration">
+		<customHeader>
+			<Bar id="bar_id" class="headerBackgroundDialog">
+				<contentMiddle>
+					<Title text="Columns Show/Hide" id="glbConfCustomerPopupTitle"></Title>
+				</contentMiddle>
+				<contentLeft>
+					<CheckBox text="Select All" select="selectAllColumns" id="checkboxAllSelected"></CheckBox>
+				</contentLeft>
+			</Bar>
+		</customHeader>
+		<Panel id="panel_id">
+			<List id="List" items="{ path: 'oList>/list'}" class="sapUiSizeCompact" mode="MultiSelect">
+				<items>
+					<StandardListItem id="item_id" title="{oList>column}" selected="{oList>visiblity}"/>
+				</items>
+			</List>
+		</Panel>
+		<buttons>
+			<Button id="okid" icon="sap-icon://accept" text="Ok" type="Accept" press="onOKColumnFrag" class="sapUiSizeCompact"/>
+			<Button id="cancel_id" icon="sap-icon://cancel" text="Cancel" type="Reject" press="onCancelColumnFrag" class="sapUiSizeCompact"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
